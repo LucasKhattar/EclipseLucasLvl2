@@ -7,8 +7,8 @@ public static void main(String[] args) {
 }
 JFrame frame;
 GamePanel game;
-final int width = 500;
-final int height = 800;
+static final int WIDTH = 500;
+static final int HEIGHT = 800;
 LeaugeInvaders() {
 	frame = new JFrame();
 	game = new GamePanel();
@@ -18,7 +18,7 @@ LeaugeInvaders() {
 	 frame.add(game);
 	 frame.addKeyListener(game);
 		frame.setVisible(true);
-		frame.setSize(width, height);
+		frame.setSize(WIDTH, HEIGHT);
 		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 game.startGame();
  }
