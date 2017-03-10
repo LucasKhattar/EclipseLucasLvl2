@@ -6,10 +6,9 @@ public class GameObject {
 	int width;
 	int height;
 	void update(){
-		x+=1;
-		y+=1;
+		
 	}
 	void draw(Graphics graph){
-		graph.fillRect(x, y, 100, 100);
+		
 	}
 }

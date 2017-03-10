@@ -13,9 +13,14 @@ import javax.swing.Timer;
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 Timer timer;
 Font titleFont;
+Font titleFont2;
+Font titleFont3;
+Rocketship r = new Rocketship(250, 700, 50, 50);
 GamePanel(){
 	timer = new Timer(1000/60, this);
 	titleFont = new Font("Arial",Font.PLAIN,48);
+	titleFont2 = new Font("Arial", Font.PLAIN,25);
+	titleFont3 = new Font("Arial", Font.PLAIN,25);
 }
 void startGame(){
 	timer.start();
@@ -29,7 +34,7 @@ void updateMenuState(){
 	
 }
 void updateGameState(){
-	
+	r.update();
 }
 void updateEndState(){
 	
@@ -37,18 +42,29 @@ void updateEndState(){
 void drawMenuState(Graphics g){
 	g.setColor(Color.BLUE);
 	g.fillRect(0, 0, LeaugeInvaders.WIDTH, LeaugeInvaders.HEIGHT); 
-	g.setColor(Color.BLACK);
+	g.setColor(Color.YELLOW);
 	g.setFont(titleFont); 
-	g.drawString("Leauge Invaders", 70, 200);
-	
+	g.drawString("LEAGUE INVADERS", 20, 200);
+	g.setFont(titleFont2); 
+	g.drawString("Press ENTER To Start", 100, 300);
+	g.setFont(titleFont3); 
+	g.drawString("Press SPACE For Instructions", 70, 400);
 }
 void drawGameState(Graphics g){
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, LeaugeInvaders.WIDTH, LeaugeInvaders.HEIGHT);  
+	r.draw(g);
 }
 void drawEndState(Graphics g){
 	g.setColor(Color.RED);
-	g.fillRect(0, 0, LeaugeInvaders.WIDTH, LeaugeInvaders.HEIGHT);  
+	g.fillRect(0, 0, LeaugeInvaders.WIDTH, LeaugeInvaders.HEIGHT);
+	g.setColor(Color.BLACK);
+	g.setFont(titleFont); 
+	g.drawString("GAME OVER", 100, 100);
+	g.setFont(titleFont2); 
+	g.drawString("You Killed 0 Aliens", 140, 300);
+	g.setFont(titleFont3); 
+	g.drawString("Press BACKSPACE To Restart", 70, 500);
 }
 @Override
 public void actionPerformed(ActionEvent e) {
