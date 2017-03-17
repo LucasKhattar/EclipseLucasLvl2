@@ -15,13 +15,18 @@ Timer timer;
 Font titleFont;
 Font titleFont2;
 Font titleFont3;
-Rocketship r = new Rocketship(250, 700, 50, 50);
+Rocketship rocket = new Rocketship(250, 700, 50, 50);
+
+ObjectManager manager = new ObjectManager();
+
 GamePanel(){
 	timer = new Timer(1000/60, this);
 	titleFont = new Font("Arial",Font.PLAIN,48);
 	titleFont2 = new Font("Arial", Font.PLAIN,25);
 	titleFont3 = new Font("Arial", Font.PLAIN,25);
+	manager.addObject(rocket); 
 }
+
 void startGame(){
 	timer.start();
 }
@@ -34,7 +39,7 @@ void updateMenuState(){
 	
 }
 void updateGameState(){
-	r.update();
+	manager.update();
 }
 void updateEndState(){
 	
@@ -53,7 +58,7 @@ void drawMenuState(Graphics g){
 void drawGameState(Graphics g){
 	g.setColor(Color.BLACK);
 	g.fillRect(0, 0, LeaugeInvaders.WIDTH, LeaugeInvaders.HEIGHT);  
-	r.draw(g);
+	manager.draw(g);
 }
 void drawEndState(Graphics g){
 	g.setColor(Color.RED);
@@ -91,12 +96,12 @@ public void paintComponent(Graphics g){
 @Override
 public void keyTyped(KeyEvent e) {
 	// TODO Auto-generated method stub
-	System.out.println("1");
+
 }
 @Override
 public void keyPressed(KeyEvent e) {
 	// TODO Auto-generated method stub
-	System.out.println("2");
+
 	if(e.getKeyCode()==10){
 		if(currentState == MENU_STATE){
 			currentState = GAME_STATE;
@@ -108,11 +113,31 @@ public void keyPressed(KeyEvent e) {
 			currentState = MENU_STATE;
 		}
 	}
+	int keyCode = e.getKeyCode();
+	System.out.println(keyCode);
+	if(e.getKeyCode()==KeyEvent.VK_LEFT){
+	rocket.xSpeed=-5;
+	}
+	if(e.getKeyCode()==KeyEvent.VK_UP){
+	rocket.ySpeed=-5;
+	}
+	if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+	rocket.xSpeed=+5;
+	}
+	if(e.getKeyCode()==KeyEvent.VK_DOWN){
+	rocket.ySpeed=+5;
+	}
+	if(e.getKeyCode()==KeyEvent.VK_SPACE){
+		manager.addObject(new Projectile(rocket.x+20, rocket.y+20, 10, 10));
+	}
 }
 @Override
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
-	System.out.println("3");
-}
+	if(e.getKeyCode()!=KeyEvent.VK_SPACE){
+	rocket.xSpeed=0;
+	rocket.ySpeed=0;
+	}
+}    
 
 }
