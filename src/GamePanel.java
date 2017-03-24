@@ -40,6 +40,11 @@ void updateMenuState(){
 }
 void updateGameState(){
 	manager.update();
+	manager.manageEnemies();
+	manager.checkCollision();
+	if(rocket.isAlive==false){
+		currentState=END_STATE;
+	}
 }
 void updateEndState(){
 	
@@ -67,7 +72,7 @@ void drawEndState(Graphics g){
 	g.setFont(titleFont); 
 	g.drawString("GAME OVER", 100, 100);
 	g.setFont(titleFont2); 
-	g.drawString("You Killed 0 Aliens", 140, 300);
+	g.drawString("You Killed "+manager.getScore()+" Aliens", 140, 300);
 	g.setFont(titleFont3); 
 	g.drawString("Press BACKSPACE To Restart", 70, 500);
 }
@@ -96,7 +101,7 @@ public void paintComponent(Graphics g){
 @Override
 public void keyTyped(KeyEvent e) {
 	// TODO Auto-generated method stub
-
+	
 }
 @Override
 public void keyPressed(KeyEvent e) {
@@ -104,6 +109,8 @@ public void keyPressed(KeyEvent e) {
 
 	if(e.getKeyCode()==10){
 		if(currentState == MENU_STATE){
+			rocket.isAlive = true;
+			
 			currentState = GAME_STATE;
 		}
 		else if(currentState == GAME_STATE){
@@ -127,9 +134,6 @@ public void keyPressed(KeyEvent e) {
 	if(e.getKeyCode()==KeyEvent.VK_DOWN){
 	rocket.ySpeed=+5;
 	}
-	if(e.getKeyCode()==KeyEvent.VK_SPACE){
-		manager.addObject(new Projectile(rocket.x+20, rocket.y+20, 10, 10));
-	}
 }
 @Override
 public void keyReleased(KeyEvent e) {
@@ -137,6 +141,9 @@ public void keyReleased(KeyEvent e) {
 	if(e.getKeyCode()!=KeyEvent.VK_SPACE){
 	rocket.xSpeed=0;
 	rocket.ySpeed=0;
+	}
+	if(e.getKeyCode()==KeyEvent.VK_SPACE){
+		manager.addObject(new Projectile(rocket.x+20, rocket.y+20, 10, 10));
 	}
 }    
 

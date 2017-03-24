@@ -3,19 +3,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Rocketship extends GameObject {
-	int x;
-	int y;
-	int width;
-	int height;
 	int xSpeed;
 	int ySpeed;
 Rocketship(int x, int y, int width, int height){
+	super();
 	this.x=x;
 	this.y=y;
 	this.width=width;
 	this.height=height;
 }
 void update(){
+	super.update();
 	x+=xSpeed;
 	y+=ySpeed;
 }

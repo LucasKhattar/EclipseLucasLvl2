@@ -1,9 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Projectile  extends GameObject {
-	int speed = 10;
-	Projectile(int x, int y, int width, int height){
+public class Alien extends GameObject{
+	Alien(int x, int y, int width, int height){
 		super();
 		this.x=x;
 		this.y=y;
@@ -12,13 +11,10 @@ public class Projectile  extends GameObject {
 	}
 	void update(){
 		super.update();
-		y-=speed;
-		if(y<=0){
-			isAlive = false;
-		}
+		y=y+1;
 	}
 	void draw(Graphics g){
-		g.setColor(Color.RED);
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, width, height);
 	}
 }
