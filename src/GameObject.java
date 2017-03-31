@@ -8,14 +8,16 @@ public class GameObject {
 	int height;
 	boolean isAlive = true;
 	Rectangle collisionBox;
-	GameObject(){
+
+	GameObject() {
 		collisionBox = new Rectangle(x, y, width, height);
 	}
-	
-	void update(){
+
+	void update() {
 		collisionBox.setBounds(x, y, width, height);
 	}
-	void draw(Graphics graph){
-		
+
+	void draw(Graphics graph) {
+
 	}
-} 
+}
